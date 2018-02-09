@@ -1,0 +1,20 @@
+{
+    "name": "tumedia/tumedia-oauth2-provider",
+    "description": "Oauth2 provider for league/oauth2-client",
+    "type": "library",
+    "license": "Proprietary",
+    "authors": [
+        {
+            "name": "Teknisk Ukeblad",
+            "email": "utvikling@tu.no"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Tumedia\\OAuth2\\": "src/"
+        }
+    },
+    "require": {
+        "league/oauth2-client": "^2.3"
+    }
+}
