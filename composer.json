@@ -2,7 +2,7 @@
     "name": "tumedia/oauth2-tumedia",
     "description": "Oauth2 provider for league/oauth2-client",
     "type": "library",
-    "license": "Proprietary",
+    "license": "proprietary",
     "authors": [
         {
             "name": "Teknisk Ukeblad",
