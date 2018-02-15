@@ -1,5 +1,5 @@
 {
-    "name": "tumedia/tumedia-oauth2-provider",
+    "name": "tumedia/oauth2-tumedia",
     "description": "Oauth2 provider for league/oauth2-client",
     "type": "library",
     "license": "Proprietary",
