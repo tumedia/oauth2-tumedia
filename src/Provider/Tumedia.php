@@ -6,6 +6,7 @@ use League\OAuth2\Client\Provider\AbstractProvider;
 use League\OAuth2\Client\Token\AccessToken;
 use League\OAuth2\Client\Tool\BearerAuthorizationTrait;
 use Psr\Http\Message\ResponseInterface as Response;
+use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
 
 class Tumedia extends AbstractProvider {
     use BearerAuthorizationTrait;
@@ -39,13 +40,8 @@ class Tumedia extends AbstractProvider {
 
     function checkResponse(Response $response, $data)
     {
-        if ($response->getStatusCode() >= 400)
-        {
-            throw new \Exception("Got status code " . $response->getStatusCode());
-        }
-        elseif (isset($data['error']))
-        {
-            throw new \Exception("Got error");
+        if ($response->getStatusCode() >= 400 || isset($data['error'])) {
+            throw new IdentityProviderException($data['error'] ?? '', $response->getStatusCode(), $data);
         }
     }
 
