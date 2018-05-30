@@ -16,17 +16,17 @@ class Tumedia extends AbstractProvider
 
     public function getBaseAuthorizationUrl() : string
     {
-        return $this->baseUrl . '/oauth/authorize';
+        return "{$this->baseUrl}/oauth/authorize";
     }
 
     public function getBaseAccessTokenUrl(array $params) : string
     {
-        return $this->baseUrl . '/oauth/token';
+        return "{$this->baseUrl}/oauth/token";
     }
 
     public function getResourceOwnerDetailsUrl(AccessToken $token) : string
     {
-        return $this->baseUrl . '/api/user';
+        return "{$this->baseUrl}/api/user";
     }
 
     public function createResourceOwner(array $response, AccessToken $token)
