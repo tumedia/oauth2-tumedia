@@ -8,41 +8,41 @@ use League\OAuth2\Client\Tool\BearerAuthorizationTrait;
 use Psr\Http\Message\ResponseInterface as Response;
 use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
 
-class Tumedia extends AbstractProvider {
+class Tumedia extends AbstractProvider
+{
     use BearerAuthorizationTrait;
 
     public $baseUrl = "https://auth.tumedia.no";
 
-    function getBaseAuthorizationUrl() : string
+    public function getBaseAuthorizationUrl() : string
     {
         return $this->baseUrl . '/oauth/authorize';
     }
 
-    function getBaseAccessTokenUrl(array $params) : string
+    public function getBaseAccessTokenUrl(array $params) : string
     {
         return $this->baseUrl . '/oauth/token';
     }
 
-    function getResourceOwnerDetailsUrl(AccessToken $token) : string
+    public function getResourceOwnerDetailsUrl(AccessToken $token) : string
     {
         return $this->baseUrl . '/api/user';
     }
 
-    function createResourceOwner(array $response, AccessToken $token)
+    public function createResourceOwner(array $response, AccessToken $token)
     {
         return $response;
     }
 
-    function getDefaultScopes()
+    public function getDefaultScopes()
     {
         return [];
     }
 
-    function checkResponse(Response $response, $data)
+    public function checkResponse(Response $response, $data)
     {
         if ($response->getStatusCode() >= 400 || isset($data['error'])) {
             throw new IdentityProviderException($data['error'] ?? '', $response->getStatusCode(), $data);
         }
     }
-
 }
