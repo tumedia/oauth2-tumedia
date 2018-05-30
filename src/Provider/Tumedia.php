@@ -5,7 +5,7 @@ namespace Tumedia\OAuth2\Provider;
 use League\OAuth2\Client\Provider\AbstractProvider;
 use League\OAuth2\Client\Token\AccessToken;
 use League\OAuth2\Client\Tool\BearerAuthorizationTrait;
-use Psr\Http\Message\ResponseInterface as Response;
+use Psr\Http\Message\ResponseInterface;
 use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
 
 class Tumedia extends AbstractProvider
@@ -39,10 +39,21 @@ class Tumedia extends AbstractProvider
         return [];
     }
 
-    public function checkResponse(Response $response, $data)
+    public function checkResponse(ResponseInterface $response, $data)
     {
         if ($response->getStatusCode() >= 400 || isset($data['error'])) {
-            throw new IdentityProviderException($data['error'] ?? '', $response->getStatusCode(), $data);
+            throw new IdentityProviderException(
+                $this->formatErrorMessage($data),
+                $response->getStatusCode(),
+                $data
+            );
         }
+    }
+
+    protected function formatErrorMessage($data)
+    {
+        return '['.($data['error'] ?? '').']'.
+            '['.($data['message'] ?? '').']'.
+            '['.($data['hint'] ?? '').']';
     }
 }
